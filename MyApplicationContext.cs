@@ -1,8 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
+
 
 namespace WPFTestApps
 {
-    public class MyApplicationContext
+    public class MyApplicationContext : ObservableProperty
     {
         private string myInputText;
 
@@ -19,6 +23,7 @@ namespace WPFTestApps
             {
                 myInputText = value;
                 Debug.WriteLine($"MyInputText changed to: {myInputText}");
+                OnPropertyChanged();
             }
         }
 
@@ -27,6 +32,10 @@ namespace WPFTestApps
             get; set;
         }
 
+        private Thread updateThread;
+
+        
+
         public MyApplicationContext()
         {
             this.ApplicationName = "WPF Test Application";
@@ -34,6 +43,16 @@ namespace WPFTestApps
             this.Version = "1.0.0"; // Default version, can be changed later
             this.ConcurrentUserCount = 10;
             this.MyInputText = "Default Text";
+
+            updateThread = new Thread(new ThreadStart(UpdateMyValue));
+            updateThread.Start();
+        }
+
+        private void UpdateMyValue()
+        {
+            Thread.Sleep(10000);
+            this.MyInputText = "Updated after 10 ms";
         }
     }
+
 }

@@ -46,7 +46,7 @@
         
         
         <TextBox x:Name="myTextBox" 
-                 Text="{Binding MyInputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="98,217,134,0" Height="30" VerticalAlignment="Top"/>
+                 Text="{Binding MyInputText, Mode=, UpdateSourceTrigger=PropertyChanged}" Margin="98,217,134,0" Height="30" VerticalAlignment="Top"/>
        
         <TextBlock x:Name="textBlock1" 
                    HorizontalAlignment="Left" 
